@@ -398,8 +398,6 @@ class ImageProcessor(Processor):
 
     def process(self, descriptor: StreamDescriptor, context: dict):
 
-        from .imaginglibs import get_image_factory
-
         Image = get_image_factory()
         # Copy the original info
         # generating thumbnail and storing in buffer
