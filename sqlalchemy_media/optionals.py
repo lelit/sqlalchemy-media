@@ -3,7 +3,7 @@
 optionals Module
 ----------------
 
-This module is a helper for handing optional packages.
+This module is a helper for handling optional packages.
 
 Optional packages are not included in ``setup.py``. So :exc:`.OptionalPackageRequirementError` will be raised if
 requested package is not provided.
@@ -57,6 +57,26 @@ def ensure_wand():
 
     if wand is None:  # pragma: no cover
         raise OptionalPackageRequirementError('wand')
+
+
+# PIL / Pillow
+
+try:
+    # noinspection PyPackageRequirements
+    import PIL
+except ImportError:  # pragma: no cover
+    PIL = None
+
+
+def ensure_pil():
+    """
+
+    .. warning:: :exc:`.OptionalPackageRequirementError` will be raised if ``Pillow`` is not installed.
+
+    """
+
+    if PIL is None:  # pragma: no cover
+        raise OptionalPackageRequirementError('Pillow')
 
 
 # requests-aws4auth
