@@ -473,7 +473,7 @@ class ImageAnalyzer(Analyzer):
         # This processor requires seekable stream.
         descriptor.prepare_to_read(backend='memory')
 
-        with Image(file=descriptor)as img:
+        with Image(file=descriptor) as img:
             context.update(
                 width=img.width,
                 height=img.height,
@@ -483,4 +483,3 @@ class ImageAnalyzer(Analyzer):
         # prepare for next processor, calling this method is not bad and just uses the memory
         # temporary.
         descriptor.prepare_to_read(backend='memory')
-
