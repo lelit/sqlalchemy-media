@@ -457,7 +457,7 @@ class ImageAnalyzer(Analyzer):
     .. versionadded:: 0.16
 
     Analyze an image using available image library by calling the
-    :classmethod:`.imaging.ImagingLibrary.get_available()
+    :func:`.imaginglibs.get_image_factory()` function.
 
     .. warning:: If none of ``Wand`` or ``Pillow`` are installed the
                  :exc:`.OptionalPackageRequirementError` will be raised.

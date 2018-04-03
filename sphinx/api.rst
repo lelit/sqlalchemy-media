@@ -209,6 +209,12 @@ WandAnalyzer
 .. autoclass:: WandAnalyzer
 
 
+ImageAnalyzer
+^^^^^^^^^^^^^
+
+.. autoclass:: ImageAnalyzer
+
+
 Validator
 ^^^^^^^^^
 
@@ -272,5 +278,3 @@ Other Modules
 .. automodule:: sqlalchemy_media.optionals
 
 .. automodule:: sqlalchemy_media.constants
-
-
