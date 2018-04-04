@@ -32,11 +32,12 @@ def use_pil():
         "Minimalistic wand-compatibility layer on top of PIL Image."
 
         def __init__(self, *, file):
-            self._i = PILImage.open(file)
+            self._i = i = PILImage.open(file)
+            self._f = i.format
 
         @property
         def mimetype(self):
-            return PILImage.MIME[self._i.format]
+            return PILImage.MIME[self.format]
 
         @property
         def height(self):
@@ -50,6 +51,16 @@ def use_pil():
         def size(self):
             return self._i.size
 
+        @property
+        def format(self):
+            return self._f
+
+        @format.setter
+        def format(self, format):
+            if format == 'jpg':
+                format = 'jpeg'
+            self._f = format
+
         def __enter__(self):
             return self
 
@@ -58,6 +69,12 @@ def use_pil():
             # but the associated StreamDescriptor expects it to be still operable...
             # self._i.close()
             pass
+
+        def resize(self, width, height):
+            self._i.thumbnail((width, height))
+
+        def save(self, *, file):
+            self._i.save(file, self.format)
 
     ImageFactory = WandedPILImage
 
