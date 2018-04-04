@@ -4,9 +4,10 @@ from os.path import dirname, abspath, join
 
 from sqlalchemy_media.descriptors import AttachableDescriptor
 from sqlalchemy_media.processors import ImageProcessor, ImageAnalyzer
+from sqlalchemy_media.tests.helpers import MultiImagingLib
 
 
-class ImageProcessorTestCase(unittest.TestCase):
+class ImageProcessorTestCase(unittest.TestCase, metaclass=MultiImagingLib):
 
     @classmethod
     def setUpClass(cls):
