@@ -5,5 +5,5 @@ from .s3 import mockup_s3_server
 from .ssh import MockupSSHServer, MockupSSHTestCase
 from .ftp import MockFTP
 from .static import mockup_http_static_server
-from .testcases import SqlAlchemyTestCase, TempStoreTestCase
+from .testcases import MultiImagingLib, SqlAlchemyTestCase, TempStoreTestCase
 from .types import Json

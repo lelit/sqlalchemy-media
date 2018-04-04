@@ -9,6 +9,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 from sqlalchemy_media import StoreManager, FileSystemStore
+from sqlalchemy_media.imaginglibs import reset_choice, use_pil, use_wand
 
 
 class SqlAlchemyTestCase(unittest.TestCase):
@@ -63,3 +64,23 @@ class TempStoreTestCase(SqlAlchemyTestCase):
             functools.partial(FileSystemStore, self.sys_temp_path, self.base_url)
         )
         super().setUp()
+
+
+class MultiImagingLib(type):
+    def __new__(cls, name, bases, namespace, **kwds):
+        new_namespace = {}
+        for key, value in namespace.items():
+            if key.startswith('test_') and callable(value):
+                for name, choicer in (('wand', use_wand),
+                                      ('pil', use_pil)):
+                    @functools.wraps(value)
+                    def wrapper(*args, **kwargs):
+                        choicer()
+                        try:
+                            value(*args, **kwargs)
+                        finally:
+                            reset_choice()
+                    new_namespace[key + '__' + name] = wrapper
+            else:
+                new_namespace[key] = value
+        return type.__new__(cls, name, bases, new_namespace)
