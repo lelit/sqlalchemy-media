@@ -1,4 +1,3 @@
-
 import unittest
 from os.path import join, exists
 
@@ -6,12 +5,12 @@ from sqlalchemy import Column, Integer
 
 from sqlalchemy_media.attachments import Image, Thumbnail, ImageList
 from sqlalchemy_media.stores import StoreManager
-from sqlalchemy_media.tests.helpers import Json, TempStoreTestCase
+from sqlalchemy_media.tests.helpers import Json, MultiImagingLib, TempStoreTestCase
 from sqlalchemy_media.exceptions import ThumbnailIsNotAvailableError
 from sqlalchemy_media.processors import ImageProcessor
 
 
-class ImageTestCase(TempStoreTestCase):
+class ImageTestCase(TempStoreTestCase, metaclass=MultiImagingLib):
 
     def test_image(self):
 
